@@ -39,7 +39,10 @@ RUN apt-get update && \
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:en" LC_ALL="en_US.UTF-8" \
     PATH="/opt/conda/bin:${PATH}"
 
-RUN apt-get update && apt-get install -y tcsh libnss-sss \
+RUN apt-get update && \
+	apt-get install -y tcsh libnss-sss && \
+    apt-get clean && apt-get purge && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
